@@ -13,7 +13,7 @@
   <!-- Seccion 2.identifica -->
   <!--                      -->
   <div class="container center" id="identifica">
-     <h1 class="top_header">WhatSAT 201999999999</h1>
+     <h1 class="top_header">WhatSAT 2019</h1>
      <form name="contact">
        <label class="text-primary">Introduce tu nombre de usuario</label>
        <div class="row">
@@ -75,7 +75,7 @@
 
   periodical = setInterval(recibe,6000);
   var id_org;
-  // la va
+  // la variable id_org almacena el valor del campo identifica
   function handleInput(e){
     id_org = e;
   }
@@ -108,10 +108,13 @@
       });
   }
 
+  var textoteclado; //almacena el texto introducido por teclado
   function handleTeclado(e){
+    textoteclado = e;
   }
 
   function handleEnvia(){
+    envia(textoteclado,"text");
   }
 
   function handleFotos(){
@@ -169,10 +172,27 @@
   }
 
   function envia(contenido,tipo){
-  }
+    var url = 'https://ssaatt.com/whatsat/envia';
+    var data={id_org:id_org,id_dest:id_dest,'tipo':tipo,'contenido':contenido};
+    var formData = new formData();
+    for (var key in data) {
+    formData.append(key, data[key]);}
 
+    fetch (url, {
+      method: 'POST',
+      body: formData,})
+      .then(function(response) {
+        return response.json();
+    })
+      .then(function (data) {
+        console.log('Success:', data);
+      }
+    );
+  }
+  var id_dest;
   function terminal(name){
     document.getElementById('contactos').style.visibility="hidden";
+    id_dest = name;
 
  }
 
