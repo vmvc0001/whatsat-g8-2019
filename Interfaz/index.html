@@ -1,0 +1,183 @@
+<html>
+<head>
+  <title>WhatSAT 2019</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="estilos.css"/>
+</head>
+<body>
+<!--                      -->
+<!-- Seccion 1.principal  -->
+<!--                      -->
+<div id="principal">
+  <!--                      -->
+  <!-- Seccion 2.identifica -->
+  <!--                      -->
+  <div class="container center" id="identifica">
+     <h1 class="top_header">WhatSAT 2019</h1>
+     <form name="contact">
+       <label class="text-primary">Introduce tu nombre de usuario</label>
+       <div class="row">
+         <div class="col-xs-7"><input type="text" name="userName" class="form-control" onChange="handleInput(document.contact.userName.value)"/></div>
+         <div class="col-xs-2"><input type="button" class="btn btn-primary" value="Usuarios" onClick="handleClick()"/></div>
+       </div>
+     </form>
+  </div>
+  <!--                      -->
+  <!-- Seccion 3.contactos  -->
+  <!--                      -->
+  <div class="container center" id="contactos">
+  </div>
+  <!--                      -->
+  <!-- Seccion 4.terminal   -->
+  <!--                      -->
+  <div class="container" id="terminal">
+    <!--                      -->
+    <!-- Seccion 4.1.fotos      -->
+    <!--                      -->
+    <div class="container center" id="fotos">
+	     <form role="form center">
+  	     <div class="row" id="Webcam">
+  	       <video width="200" height="180"></video>
+  	     </div>
+         <div class="row">
+           <input type="button" class="btn btn-primary" value="OK" onClick="capturePhoto()" />
+           <input type="button" class="btn btn-primary" value="Cancel" onClick="cancelPhoto()" />
+         </div>
+	      </form>
+     </div>
+    <div class="pantalla" id="pantalla">
+    </div>
+    <div id="teclado">
+      <input type="text" class="form-control" name="teclado" onChange="handleTeclado(value)"/>
+    </div>
+    <div id="comandos">
+      <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
+      <img  width="30" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
+      <img  width="30" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
+      <img  width="40" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  this.state={
+    id_org:'',
+    id_dest:'',
+    contactos:[],
+	  mensajes:[],
+    teclado: '',
+    pantalla: document.getElementById('pantalla'),
+	  divTermi: document.getElementById('terminal'),
+	  divConta: document.getElementById('contactos'),
+	  divFotos: document.getElementById('fotos'),
+    video: document.querySelector('video'),
+    emision: ''
+  };
+
+  periodical = setInterval(recibe,6000);
+  var id_org;
+  // la va
+  function handleInput(e){
+    id_org = e;
+  }
+
+  function handleClick(){
+    contactos(id_org);
+  }
+
+  function contactos(e){
+    var path = "https://ssaatt.com/whatsat/";
+    var url = path + "contactos/" + e;
+
+    fetch(url)
+      .then(function(response) {
+        return response.json();
+        })
+      .then(function(data) {
+        //var data = JSON.parse(JSON.stringify(dato));
+        var html1 = "<table border=1>";
+        var tam=data.length;
+        for (i=0;i<tam;i++){
+          var id=data[i].id;
+          var surName=data[i].surName;
+          var name=data[i].name;
+          var profileImageUrl=data[i].profileImageUrl;
+          html1 += "<tr><td>" + id + "</td><td>" + surName + "</td><td>" + name + "</td><td><a  href='#' onClick=terminal(&quot;" + id + "&quot;)><img src=" + profileImageUrl + "></a></td></tr>";
+          document.getElementById("contactos").innerHTML = html1;
+        }
+        html1 += "</table>";
+      });
+  }
+
+  function handleTeclado(e){
+  }
+
+  function handleEnvia(){
+  }
+
+  function handleFotos(){
+  }
+
+  function capturePhoto() {
+    var canvas = document.createElement('canvas');
+    document.querySelector('html').appendChild(canvas);
+    canvas.width = this.state.video.getAttribute("width");
+    canvas.height = this.state.video.getAttribute("height");
+    canvas.getContext('2d').drawImage(this.state.video, 0, 0, canvas.width, canvas.height);
+    var picture = canvas.toDataURL("image/png");
+    document.querySelector('html').removeChild(canvas);
+	  cancelPhoto();
+	  var texto="<p align=right>"+this.state.teclado+"</p>";
+    this.state.pantalla.innerHTML= '<p align=right><img width=80 src="'+picture+'"/></p>'+ this.state.pantalla.innerHTML;
+    envia(picture,"image");
+  }
+
+  function cancelPhoto(){
+    this.state.emision.getTracks()[0].stop();
+  }
+
+  function exito(stream) {
+	  this.state.video.autoplay=true;
+    this.state.video.srcObject = stream;
+	  this.state.emision=stream;
+  }
+
+  function error(e) {
+  }
+
+  function handleVoz(){
+    var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
+		recognition.lang = 'es-ES';
+		recognition.start();
+		var data_uri;
+		var pantalla=this.state.pantalla;
+		var divFotos=this.state.divFotos;
+	    pantalla.innerHTML= "<p align=right>Escuchando....</p>"+ pantalla.innerHTML;
+		recognition.onend = function(event) {
+		  if (data_uri==null) pantalla.innerHTML= "<p align=right>No he reconocido</p>"+pantalla.innerHTML;
+		};
+		recognition.onresult = function(event) {
+			data_uri = event.results[0][0].transcript;
+		    if (data_uri!=''){
+		      var texto="<p align=right>"+data_uri+"</p>";
+              pantalla.innerHTML= texto + pantalla.innerHTML;
+              envia(data_uri,"speech");
+	         }
+		};
+  }
+
+  function handleGeoLocation(e){
+  }
+
+  function envia(contenido,tipo){
+  }
+
+  function terminal(name){
+    document.getElementById('contactos').style.visibility="hidden";
+
+ }
+
+ function recibe(){
+ }
+</script>
+</body>
+</html>
