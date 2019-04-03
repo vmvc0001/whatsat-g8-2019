@@ -73,9 +73,8 @@
     emision: ''
   };
 
-  periodical = setInterval(recibe,6000);
-  var id_org;
-  // la variable id_org almacena el valor del campo identifica
+  var id_org; // la variable id_org almacena el valor del campo identifica
+
   function handleInput(e){
     id_org = e;
   }
@@ -172,7 +171,7 @@
   function handleGeoLocation(e){
   }
 
-  function envia(contenido,tipo){
+  function envia(contenido,tipo){ //asociada al envento de enviar cualquier tipo de mensaje en un POST
     var url = 'https://ssaatt.com/whatsat/envia';
     var data={'id_org':id_org,'id_dest':id_dest,'tipo':tipo,'contenido':contenido};
     var formData = new FormData();
@@ -190,16 +189,20 @@
         console.log('Success:', data);
       });
   }
+
   var id_dest;
-  function terminal(name){
+
+  function terminal(name){ //oculta los contactos y abre la terminal con un usuario destino de la mensajeria
     document.getElementById('contactos').style.visibility="hidden";
     document.getElementById('terminal').style.visibility="visible";
     id_dest = name;
 
  }
 
+  periodical = setInterval(recibe(),3000); //llama a recibe cada 3000 ms
  function recibe(){
-   setInterval(function(){ alert("Hello"); }, 3000);
+   var url =  "https://ssaatt.com/whatsat/recibe/" + id_org + id_dest;
+
  }
 </script>
 </body>
