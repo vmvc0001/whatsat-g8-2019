@@ -2,7 +2,7 @@
 <head>
   <title>WhatSAT 2019</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link rel="stylesheet" href="estilos.css"/>
+  <link rel="stylesheet" type="text/css" href="estilos.css"/>
 </head>
 <body>
 <!--                      -->
@@ -48,7 +48,7 @@
     <div class="pantalla" id="pantalla">
     </div>
     <div id="teclado">
-      <input type="text" class="form-control" name="teclado" onChange="handleTeclado(value)"/>
+      <input type="text" class="form-control" id="tecladoinput" onChange="handleTeclado(document.getElementById('tecladoinput').value)"/>
     </div>
     <div id="comandos">
       <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
@@ -85,8 +85,9 @@
   }
 
   function contactos(e){
-    var path = "https://ssaatt.com/whatsat/";
-    var url = path + "contactos/" + e;
+    document.getElementById('contactos').style.visibility="visible";
+    document.getElementById('terminal').style.visibility="hidden";
+    var url = "https://ssaatt.com/whatsat/contactos/" + e;
 
     fetch(url)
       .then(function(response) {
@@ -94,7 +95,7 @@
         })
       .then(function(data) {
         //var data = JSON.parse(JSON.stringify(dato));
-        var html1 = "<table border=1>";
+        var html1 = "<table id='tablacontactos'>";
         var tam=data.length;
         for (i=0;i<tam;i++){
           var id=data[i].id;
@@ -108,13 +109,13 @@
       });
   }
 
-  var textoteclado; //almacena el texto introducido por teclado
+  var contenido; //almacena el texto introducido por teclado
   function handleTeclado(e){
-    textoteclado = e;
+    contenido = e;
   }
 
   function handleEnvia(){
-    envia(textoteclado,"text");
+    envia(contenido,"text");
   }
 
   function handleFotos(){
@@ -173,30 +174,32 @@
 
   function envia(contenido,tipo){
     var url = 'https://ssaatt.com/whatsat/envia';
-    var data={id_org:id_org,id_dest:id_dest,'tipo':tipo,'contenido':contenido};
-    var formData = new formData();
-    for (var key in data) {
-    formData.append(key, data[key]);}
+    var data={'id_org':id_org,'id_dest':id_dest,'tipo':tipo,'contenido':contenido};
+    var formData = new FormData();
 
+    for (var key in data) {
+      formData.append(key, data[key]);
+    }
     fetch (url, {
       method: 'POST',
       body: formData,})
       .then(function(response) {
         return response.json();
-    })
+      })
       .then(function (data) {
         console.log('Success:', data);
-      }
-    );
+      });
   }
   var id_dest;
   function terminal(name){
     document.getElementById('contactos').style.visibility="hidden";
+    document.getElementById('terminal').style.visibility="visible";
     id_dest = name;
 
  }
 
  function recibe(){
+   setInterval(function(){ alert("Hello"); }, 3000);
  }
 </script>
 </body>
