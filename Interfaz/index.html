@@ -3,6 +3,7 @@
   <title>WhatSAT 2019</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="estilos.css"/>
+  <meta charset="UTF-8">
 </head>
 <body>
 <!--                      -->
@@ -197,7 +198,7 @@
     document.getElementById('contactos').style.visibility="hidden";
     document.getElementById('terminal').style.visibility="visible";
     id_dest = name;
-    periodical = setInterval(recibe(),3000); //llama a recibe cada 3000 ms
+    periodical = setInterval(recibe(),3); //llama a recibe cada 3000 ms
  }
 
  function recibe(){
@@ -211,12 +212,13 @@
        var tam=data.length;
        var html1 = "<p>";
        for (i=0;i<tam;i++){
-         var tipo=data[i].tipo;
-         var contenido=data[i].contenido;
-         html1 += contenido + "<br>";
-         document.getElementById("pantalla").innerHTML = html1;
-       }
-       html1 += "</p>";
+         if (data[i].tipo == "text") {
+           var contenido=data[i].contenido;
+           html1 += contenido + "<br>";
+           document.getElementById("pantalla").innerHTML = html1;
+          }
+         }
+         html1 += "</p>";
      });
  }
 </script>
