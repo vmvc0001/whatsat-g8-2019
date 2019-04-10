@@ -119,9 +119,9 @@
   }
 
   function handleFotos(){
-    this.state.divTermi.style.visibility='hidden';
-    this.state.divConta.style.visibility='hidden';
-    tthis.state.divFotos.style.visibility='visible';
+    this.state.getElementById('terminal').style.visibility='hidden';
+    this.state.getElementById('contactos').style.visibility='hidden';
+    this.state.getElementById('fotos').style.visibility='visible';
     navigator.mediaDevices.getUserMedia({audio:false, video:true}).then(exito).catch(error);
 
   }
