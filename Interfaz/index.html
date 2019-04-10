@@ -88,7 +88,7 @@
   function contactos(e){
     document.getElementById('contactos').style.visibility="visible";
     document.getElementById('terminal').style.visibility="hidden";
-    this.state.divFotos.style.visibility="hidden";
+    document.getElementById('fotos').style.visibility="hidden";
     var url = "https://ssaatt.com/whatsat/contactos/" + e;
 
     fetch(url)
@@ -121,9 +121,9 @@
   }
 
   function handleFotos(){
-    this.state.divTermi.style.visibility='hidden';
-    this.state.divConta.style.visibility='hidden';
-    this.state.divFotos.style.visibility='visible';
+    document.getElementById('terminal').style.visibility='hidden';
+    document.getElementById('contactos').style.visibility='hidden';
+    document.getElementById('fotos').style.visibility='visible';
     navigator.mediaDevices.getUserMedia({audio:false, video:true}).then(exito).catch(error);
 
   }
@@ -135,18 +135,18 @@
     canvas.height = this.state.video.getAttribute("height");
     canvas.getContext('2d').drawImage(this.state.video, 0, 0, canvas.width, canvas.height);
     var picture = canvas.toDataURL("image/png");
+    envia(picture,"image");
     document.querySelector('html').removeChild(canvas);
     cancelPhoto();
-    var texto="<p align=right>"+this.state.teclado+"</p>";
-    this.state.pantalla.innerHTML= '<p align=right><img width=80 src="'+picture+'"/></p>'+ this.state.pantalla.innerHTML;
+    //var texto="<p align=right>"+this.state.teclado+"</p>";
+    //this.state.pantalla.innerHTML= '<p align=right><img width=80 src="'+picture+'"/></p>'+ this.state.pantalla.innerHTML;
     //cerrar automaticamente cuando haga foto? visibility=hidden
-    envia(picture,"image");
   }
 
   function cancelPhoto(){
     emision.getTracks()[0].stop();
-    this.state.divFotos.style.visibility='hidden';
-    terminal(this.state.id_dest);
+    document.getElementById('fotos').style.visibility='hidden';
+    terminal(id_dest);
   }
 
   function exito(stream) {
@@ -165,33 +165,35 @@
     recognition.start();
     var data_uri;
     var pantalla=this.state.pantalla;
-    var divFotos=this.state.divFotos;
-    pantalla.innerHTML= "<p align=right>Escuchando....</p>"+ pantalla.innerHTML;
+    var divFotos=document.getElementById('fotos');
+    pantalla.innerHTML= "<p align=right>Escuchando...</p>"+ pantalla.innerHTML;
     recognition.onend = function(event) {
       if (data_uri==null) pantalla.innerHTML= "<p align=right>No he reconocido</p>"+pantalla.innerHTML;
     };
     recognition.onresult = function(event) {
       data_uri = event.results[0][0].transcript;
       if (data_uri!=''){
-        var texto="<p align=right>"+data_uri+"</p>";
-        pantalla.innerHTML= texto + pantalla.innerHTML;
+        //var texto="<p align=right>"+data_uri+"</p>";
+        //pantalla.innerHTML= texto + pantalla.innerHTML;
+        pantalla.innerHTML= "<p align=right>Finalizado</p>"+ pantalla.innerHTML;
         envia(data_uri,"speech");
       }
     };
   }
-  var x = document.getElementById("pantalla");
 
   function handleGeoLocation(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
+      document.getElementById("pantalla").innerHTML = "Geolocation is not supported by this browser.";
     }
   }
 
   function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
+    var poslat = "Latitud: " + position.coords.latitude;
+    var poslong = "Longitud: " + position.coords.longitude;
+    envia(poslat,"text");
+    envia(poslong,"text");
   }
 
   function envia(contenido,tipo){ //asociada al envento de enviar cualquier tipo de mensaje en un POST
@@ -233,17 +235,16 @@
       })
       .then(function(data) {
         var tam=data.length;
-        var html1 = "<p>";
+        var html1 = "<p align=left>";
         for (i=0;i<tam;i++){
-          if (data[i].tipo == "text") {
+          if (data[i].tipo == "text" || data[i].tipo == "speech") {
             var contenido=data[i].contenido;
             html1 += contenido + "<br>";
             document.getElementById("pantalla").innerHTML = html1;
           }
           if (data[i].tipo == "image") {
             var contenido=data[i].contenido;
-            //decodificacion de imageURL a png; poner etiquetas img en innerHTML???
-            html1 += "<img src='" + contenido + "'/><br>";
+            html1 += "<img width=80 src='" + contenido + "'/><br>";
             document.getElementById("pantalla").innerHTML = html1;
           }
           //if (data[i].tipo == "speech") {
