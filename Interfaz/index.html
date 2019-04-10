@@ -70,9 +70,10 @@
     divTermi: document.getElementById('terminal'),
     divConta: document.getElementById('contactos'),
     divFotos: document.getElementById('fotos'),
-    video: document.querySelector('video'),
-    emision: ''
+    video: document.querySelector('video')
+    //emision: ''
   };
+  var emision;
   var periodical;
   var id_org; // la variable id_org almacena el valor del campo identifica
 
@@ -141,7 +142,7 @@
     //cerrar automaticamente cuando haga foto? visibility=hidden
     envia(picture,"image");
   }
-var emision;
+
   function cancelPhoto(){
     emision.getTracks()[0].stop();
     this.state.divFotos.style.visibility='hidden';
