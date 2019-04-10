@@ -87,6 +87,7 @@
   function contactos(e){
     document.getElementById('contactos').style.visibility="visible";
     document.getElementById('terminal').style.visibility="hidden";
+    this.state.divFotos.style.visibility="hidden";
     var url = "https://ssaatt.com/whatsat/contactos/" + e;
 
     fetch(url)
@@ -141,7 +142,7 @@
   }
 
   function cancelPhoto(){
-    this.state.emision.getTracks()[0].stop();
+    this.state.video.getTracks()[0].enabled=false;
     terminal(this.state.id_dest);
     this.state.divFotos.style.visibility='hidden';
     this.state.divTermi.style.visibility='visible';
@@ -177,10 +178,8 @@
 	         }
 		};
   }
-
-  function handleGeoLocation(){
-var x = document.getElementById("demo");
-function getLocation() {
+var x = document.getElementById("pantalla");
+function handleGeoLocation(){
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
   } else {
@@ -192,8 +191,6 @@ function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude +
   "<br>Longitude: " + position.coords.longitude;
 }
-
-  }
 
   function envia(contenido,tipo){ //asociada al envento de enviar cualquier tipo de mensaje en un POST
     var url = 'https://ssaatt.com/whatsat/envia';
