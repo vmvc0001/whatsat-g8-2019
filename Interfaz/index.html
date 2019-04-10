@@ -222,7 +222,7 @@ function showPosition(position) {
  }
 
  function recibe(){
-   var url =  "https://ssaatt.com/whatsat/recibe/" + id_dest + "/" + id_org;
+   var url =  "https://ssaatt.com/whatsat/recibe/" + id_dest + "/" + id_org; //se ha de cambiar el orden de dest y origen para que los mensajes que manda org los lea dest y viceversa
 
    fetch(url)
      .then(function(response) {
