@@ -237,6 +237,12 @@ function showPosition(position) {
            html1 += contenido + "<br>";
            document.getElementById("pantalla").innerHTML = html1;
           }
+          if (data[i].tipo == "image") {
+            var contenido=data[i].contenido;
+            //pasar imagenURL a png
+            html1 += contenido + "<br>";
+            document.getElementById("pantalla").innerHTML = html1;
+           }
          }
          html1 += "</p>";
      });
