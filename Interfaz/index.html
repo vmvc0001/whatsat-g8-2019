@@ -179,6 +179,7 @@
 		};
   }
 var x = document.getElementById("pantalla");
+
 function handleGeoLocation(){
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -222,7 +223,7 @@ function showPosition(position) {
  }
 
  function recibe(){
-   var url =  "https://ssaatt.com/whatsat/recibe/" + id_dest + "/" + id_org; //se ha de cambiar el orden de dest y origen para que los mensajes que manda org los lea dest y viceversa
+   var url =  "https://ssaatt.com/whatsat/recibe/" + id_org + "/" + id_dest;
 
    fetch(url)
      .then(function(response) {
@@ -237,12 +238,6 @@ function showPosition(position) {
            html1 += contenido + "<br>";
            document.getElementById("pantalla").innerHTML = html1;
           }
-          if (data[i].tipo == "image") {
-            var contenido=data[i].contenido;
-            //pasar imagenURL a png
-            html1 += contenido + "<br>";
-            document.getElementById("pantalla").innerHTML = html1;
-           }
          }
          html1 += "</p>";
      });
