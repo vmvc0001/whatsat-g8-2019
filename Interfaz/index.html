@@ -6,70 +6,70 @@
   <meta charset="UTF-8">
 </head>
 <body>
-<!--                      -->
-<!-- Seccion 1.principal  -->
-<!--                      -->
-<div id="principal">
   <!--                      -->
-  <!-- Seccion 2.identifica -->
+  <!-- Seccion 1.principal  -->
   <!--                      -->
-  <div class="container center" id="identifica">
-     <h1 class="top_header">WhatSAT 2019</h1>
-     <form name="contact">
-       <label class="text-primary">Introduce tu nombre de usuario</label>
-       <div class="row">
-         <div class="col-xs-7"><input type="text" name="userName" class="form-control" onChange="handleInput(document.contact.userName.value)"/></div>
-         <div class="col-xs-2"><input type="button" class="btn btn-primary" value="Usuarios" onClick="handleClick()"/></div>
-       </div>
-     </form>
-  </div>
-  <!--                      -->
-  <!-- Seccion 3.contactos  -->
-  <!--                      -->
-  <div class="container center" id="contactos">
-  </div>
-  <!--                      -->
-  <!-- Seccion 4.terminal   -->
-  <!--                      -->
-  <div class="container" id="terminal">
+  <div id="principal">
     <!--                      -->
-    <!-- Seccion 4.1.fotos      -->
+    <!-- Seccion 2.identifica -->
     <!--                      -->
-    <div class="container center" id="fotos">
-	     <form role="form center">
-  	     <div class="row" id="Webcam">
-  	       <video width="200" height="180"></video>
-  	     </div>
-         <div class="row">
-           <input type="button" class="btn btn-primary" value="OK" onClick="capturePhoto()" />
-           <input type="button" class="btn btn-primary" value="Cancel" onClick="cancelPhoto()" />
-         </div>
-	      </form>
-     </div>
-    <div class="pantalla" id="pantalla">
+    <div class="container center" id="identifica">
+      <h1 class="top_header">WhatSAT 2019</h1>
+      <form name="contact">
+        <label class="text-primary">Introduce tu nombre de usuario</label>
+        <div class="row">
+          <div class="col-xs-7"><input type="text" name="userName" class="form-control" onChange="handleInput(document.contact.userName.value)"/></div>
+          <div class="col-xs-2"><input type="button" class="btn btn-primary" value="Usuarios" onClick="handleClick()"/></div>
+        </div>
+      </form>
     </div>
-    <div id="teclado">
-      <input type="text" class="form-control" id="tecladoinput" onChange="handleTeclado(document.getElementById('tecladoinput').value)"/>
+    <!--                      -->
+    <!-- Seccion 3.contactos  -->
+    <!--                      -->
+    <div class="container center" id="contactos">
     </div>
-    <div id="comandos">
-      <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
-      <img  width="30" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
-      <img  width="30" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
-      <img  width="40" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
+    <!--                      -->
+    <!-- Seccion 4.terminal   -->
+    <!--                      -->
+    <div class="container" id="terminal">
+      <!--                      -->
+      <!-- Seccion 4.1.fotos      -->
+      <!--                      -->
+      <div class="container center" id="fotos">
+        <form role="form center">
+          <div class="row" id="Webcam">
+            <video width="200" height="180"></video>
+          </div>
+          <div class="row">
+            <input type="button" class="btn btn-primary" value="OK" onClick="capturePhoto()" />
+            <input type="button" class="btn btn-primary" value="Cancel" onClick="cancelPhoto()" />
+          </div>
+        </form>
+      </div>
+      <div class="pantalla" id="pantalla">
+      </div>
+      <div id="teclado">
+        <input type="text" class="form-control" id="tecladoinput" onChange="handleTeclado(document.getElementById('tecladoinput').value)"/>
+      </div>
+      <div id="comandos">
+        <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
+        <img  width="30" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
+        <img  width="30" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
+        <img  width="40" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
+      </div>
     </div>
   </div>
-</div>
-<script type="text/javascript">
+  <script type="text/javascript">
   this.state={
     id_org:'',
     id_dest:'',
     contactos:[],
-	  mensajes:[],
+    mensajes:[],
     teclado: '',
     pantalla: document.getElementById('pantalla'),
-	  divTermi: document.getElementById('terminal'),
-	  divConta: document.getElementById('contactos'),
-	  divFotos: document.getElementById('fotos'),
+    divTermi: document.getElementById('terminal'),
+    divConta: document.getElementById('contactos'),
+    divFotos: document.getElementById('fotos'),
     video: document.querySelector('video'),
     emision: ''
   };
@@ -91,23 +91,23 @@
     var url = "https://ssaatt.com/whatsat/contactos/" + e;
 
     fetch(url)
-      .then(function(response) {
-        return response.json();
-        })
-      .then(function(data) {
-        //var data = JSON.parse(JSON.stringify(dato));
-        var html1 = "<table id='tablacontactos'>";
-        var tam=data.length;
-        for (i=0;i<tam;i++){
-          var id=data[i].id;
-          var surName=data[i].surName;
-          var name=data[i].name;
-          var profileImageUrl=data[i].profileImageUrl;
-          html1 += "<tr><td>" + id + "</td><td>" + surName + "</td><td>" + name + "</td><td><a  href='#' onClick=terminal(&quot;" + id + "&quot;)><img src=" + profileImageUrl + "></a></td></tr>";
-          document.getElementById("contactos").innerHTML = html1;
-        }
-        html1 += "</table>";
-      });
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      //var data = JSON.parse(JSON.stringify(dato));
+      var html1 = "<table id='tablacontactos'>";
+      var tam=data.length;
+      for (i=0;i<tam;i++){
+        var id=data[i].id;
+        var surName=data[i].surName;
+        var name=data[i].name;
+        var profileImageUrl=data[i].profileImageUrl;
+        html1 += "<tr><td>" + id + "</td><td>" + surName + "</td><td>" + name + "</td><td><a  href='#' onClick=terminal(&quot;" + id + "&quot;)><img src=" + profileImageUrl + "></a></td></tr>";
+        document.getElementById("contactos").innerHTML = html1;
+      }
+      html1 += "</table>";
+    });
   }
 
   var contenido; //almacena el texto introducido por teclado
@@ -135,23 +135,23 @@
     canvas.getContext('2d').drawImage(this.state.video, 0, 0, canvas.width, canvas.height);
     var picture = canvas.toDataURL("image/png");
     document.querySelector('html').removeChild(canvas);
-	  cancelPhoto();
-	  var texto="<p align=right>"+this.state.teclado+"</p>";
+    cancelPhoto();
+    var texto="<p align=right>"+this.state.teclado+"</p>";
     this.state.pantalla.innerHTML= '<p align=right><img width=80 src="'+picture+'"/></p>'+ this.state.pantalla.innerHTML;
+    //cerrar automaticamente cuando haga foto? visibility=hidden
     envia(picture,"image");
   }
-
+var emision;
   function cancelPhoto(){
-    this.state.video.getTracks()[0].enabled=false;
-    terminal(this.state.id_dest);
+    emision.getTracks()[0].stop();
     this.state.divFotos.style.visibility='hidden';
-    this.state.divTermi.style.visibility='visible';
+    terminal(this.state.id_dest);
   }
 
   function exito(stream) {
-	  this.state.video.autoplay=true;
+    this.state.video.autoplay = true;
     this.state.video.srcObject = stream;
-	  this.state.emision=stream;
+    emision = stream;
   }
 
   function error(e) {
@@ -160,38 +160,38 @@
 
   function handleVoz(){
     var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)();
-		recognition.lang = 'es-ES';
-		recognition.start();
-		var data_uri;
-		var pantalla=this.state.pantalla;
-		var divFotos=this.state.divFotos;
-	    pantalla.innerHTML= "<p align=right>Escuchando....</p>"+ pantalla.innerHTML;
-		recognition.onend = function(event) {
-		  if (data_uri==null) pantalla.innerHTML= "<p align=right>No he reconocido</p>"+pantalla.innerHTML;
-		};
-		recognition.onresult = function(event) {
-			data_uri = event.results[0][0].transcript;
-		    if (data_uri!=''){
-		      var texto="<p align=right>"+data_uri+"</p>";
-              pantalla.innerHTML= texto + pantalla.innerHTML;
-              envia(data_uri,"speech");
-	         }
-		};
+    recognition.lang = 'es-ES';
+    recognition.start();
+    var data_uri;
+    var pantalla=this.state.pantalla;
+    var divFotos=this.state.divFotos;
+    pantalla.innerHTML= "<p align=right>Escuchando....</p>"+ pantalla.innerHTML;
+    recognition.onend = function(event) {
+      if (data_uri==null) pantalla.innerHTML= "<p align=right>No he reconocido</p>"+pantalla.innerHTML;
+    };
+    recognition.onresult = function(event) {
+      data_uri = event.results[0][0].transcript;
+      if (data_uri!=''){
+        var texto="<p align=right>"+data_uri+"</p>";
+        pantalla.innerHTML= texto + pantalla.innerHTML;
+        envia(data_uri,"speech");
+      }
+    };
   }
-var x = document.getElementById("pantalla");
+  var x = document.getElementById("pantalla");
 
-function handleGeoLocation(){
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
+  function handleGeoLocation(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
   }
-}
 
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
-}
+  function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+  }
 
   function envia(contenido,tipo){ //asociada al envento de enviar cualquier tipo de mensaje en un POST
     var url = 'https://ssaatt.com/whatsat/envia';
@@ -210,38 +210,50 @@ function showPosition(position) {
       .then(function (data) {
         console.log('Success:', data);
       });
-  }
+    }
 
-  var id_dest;
+    var id_dest;
 
-  function terminal(name){ //oculta los contactos y abre la terminal con un usuario destino de la mensajeria
-    clearInterval(periodical); //para los anteriores intervalos de referesco y solo deja que inicie el que esta a continuacion
-    document.getElementById('contactos').style.visibility="hidden";
-    document.getElementById('terminal').style.visibility="visible";
-    id_dest = name;
-    periodical = setInterval(recibe,3000); //llama a recibe cada 3000 ms
- }
+    function terminal(name){ //oculta los contactos y abre la terminal con un usuario destino de la mensajeria
+      clearInterval(periodical); //para los anteriores intervalos de referesco y solo deja que inicie el que esta a continuacion
+      document.getElementById('contactos').style.visibility="hidden";
+      document.getElementById('terminal').style.visibility="visible";
+      id_dest = name;
+      periodical = setInterval(recibe,3000); //llama a recibe cada 3000 ms
+    }
 
- function recibe(){
-   var url =  "https://ssaatt.com/whatsat/recibe/" + id_org + "/" + id_dest;
+    function recibe(){
+      var url =  "https://ssaatt.com/whatsat/recibe/" + id_dest + "/" + id_org; //se cambian dest y org para que los mensajes los visualice
+      //el destinatario y no el remitente en su misma pantalla
 
-   fetch(url)
-     .then(function(response) {
-       return response.json();
-       })
-     .then(function(data) {
-       var tam=data.length;
-       var html1 = "<p>";
-       for (i=0;i<tam;i++){
-         if (data[i].tipo == "text") {
-           var contenido=data[i].contenido;
-           html1 += contenido + "<br>";
-           document.getElementById("pantalla").innerHTML = html1;
+      fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        var tam=data.length;
+        var html1 = "<p>";
+        for (i=0;i<tam;i++){
+          if (data[i].tipo == "text") {
+            var contenido=data[i].contenido;
+            html1 += contenido + "<br>";
+            document.getElementById("pantalla").innerHTML = html1;
           }
-         }
-         html1 += "</p>";
-     });
- }
-</script>
+          if (data[i].tipo == "image") {
+            var contenido=data[i].contenido;
+            //decodificacion de imageURL a png; poner etiquetas img en innerHTML???
+            html1 += "<img src='" + contenido + "'/><br>";
+            document.getElementById("pantalla").innerHTML = html1;
+          }
+          //if (data[i].tipo == "speech") {
+            //var contenido=data[i].contenido;
+            //html1 += contenido + "<br>";
+            //document.getElementById("pantalla").innerHTML = html1;
+          //}
+        }
+        html1 += "</p>";
+      });
+    }
+  </script>
 </body>
 </html>
