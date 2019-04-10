@@ -119,6 +119,11 @@
   }
 
   function handleFotos(){
+    this.state.divTermi.style.visibility='hidden';
+    this.state.divConta.style.visibility='hidden';
+    tthis.state.divFotos.style.visibility='visible';
+    navigator.mediaDevices.getUserMedia({audio:false, video:true}).then(exito).catch(error);
+
   }
 
   function capturePhoto() {
@@ -137,6 +142,7 @@
 
   function cancelPhoto(){
     this.state.emision.getTracks()[0].stop();
+    terminal(this.state.id_dest);
   }
 
   function exito(stream) {
@@ -146,6 +152,7 @@
   }
 
   function error(e) {
+    console.log(e);
   }
 
   function handleVoz(){
