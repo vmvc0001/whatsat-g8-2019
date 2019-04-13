@@ -9,11 +9,32 @@
 h1 {
   color:#00acee;
 }
+body{
+  background-color: #CAD3D8;
+}
 
 .pantalla{
-  height:200px;
-  overflow:auto;
-  background:#ccffff
+  overflow:hidden;
+  background-image: url("https://i.pinimg.com/originals/79/5c/ab/795cabc4647f73b365e2e6eabd0f34dc.png");
+  width:500px;
+  height: 500px;
+  float:right;
+  text-transform: uppercase;
+  border: 3px solid #333;
+  font-style: italic;
+}
+
+#teclado{
+     clear: both;
+     height: 296px;
+     width: 500px;
+     float: right;
+}
+#comandos{
+  float: right;
+}
+#identifica{
+  float: center;
 }
 
 #contactos{
@@ -23,10 +44,12 @@ h1 {
 #terminal{
    z-index: 1;
    visibility: hidden;
-   position:absolute;
 }
 #fotos{
    z-index: 2;
    visibility: hidden;
    position:absolute;
+}
+img {
+  border-radius: 50%;
 }
