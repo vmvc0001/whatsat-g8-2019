@@ -56,10 +56,10 @@
         <input type="text" class="form-control" id="tecladoinput" onChange="handleTeclado(document.getElementById('tecladoinput').value)"/>
       </div>
       <div id="comandos">
-        <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
-        <img  width="30" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
         <img  width="30" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
+        <img  width="30" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
         <img  width="40" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
+        <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
       </div>
     </div>
   </div>
@@ -223,16 +223,14 @@
 
     function terminal(name){ //oculta los contactos y abre la terminal con un usuario destino de la mensajeria
       clearInterval(periodical); //para los anteriores intervalos de referesco y solo deja que inicie el que esta a continuacion
-      document.getElementById('contactos').style.visibility="hidden";
+      document.getElementById('contactos').style.visibility="visible";
       document.getElementById('terminal').style.visibility="visible";
       id_dest = name;
       periodical = setInterval(recibe,3000); //llama a recibe cada 3000 ms
     }
 
     function recibe(){
-      var url =  "https://ssaatt.com/whatsat/recibe/" + id_dest + "/" + id_org; //se cambian dest y org para que los mensajes los visualice
-      //el destinatario y no el remitente en su misma pantalla
-
+      var url =  "https://ssaatt.com/whatsat/recibe/" + id_dest + "/" + id_org; //se cambian dest y org para que los mensajes los visualice //el destinatario y no el remitente en su misma pantalla
       fetch(url)
       .then(function(response) {
         return response.json();
