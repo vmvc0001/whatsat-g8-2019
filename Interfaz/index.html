@@ -205,6 +205,20 @@
     var data={'id_org':id_org,'id_dest':id_dest,'tipo':tipo,'contenido':contenido};
     var formData = new FormData();
 
+    var html2 = "<p align='right'>";
+    switch (tipo) {
+      case 'text':
+        html2 += contenido + "</p>" ;
+        document.getElementById('tecladoinput').value = ''; //cuando pulsemos enviar un mensaje, se limpiara el formulario
+        break;
+      case 'image':
+        html2 += "<img width=80 src='" + contenido + "'/>" + "</p>" ;
+        break;
+      case 'speech':
+        html2 += contenido + "</p>";
+        break;
+    }
+
     for (var key in data) {
       formData.append(key, data[key]);
     }
