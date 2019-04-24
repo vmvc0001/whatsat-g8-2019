@@ -81,7 +81,8 @@
   var emision;
   var periodical;
   var id_org; // la variable id_org almacena el valor del campo identifica
-
+  var almacena=''; //almacena los envios de para no ser machacados en pantalla
+  
   function handleInput(e){
     id_org = e;
   }
@@ -109,7 +110,7 @@
         var surName=data[i].surName;
         var name=data[i].name;
         var profileImageUrl=data[i].profileImageUrl;
-        html1 += "<tr><td>" + id + "</td><td>" + surName + "</td><td>" + name + "</td><td><a  href='#' onClick=terminal(&quot;" + id + "&quot;)><img src=" + profileImageUrl + "></a></td></tr>";
+        html1 += "<tr><td>" + id + "</td><td>" + surName + "</td><td>" + name + "</td><td><a  href='#' onClick=terminal(&quot;" + id + "&quot;)><img class='imgpantalla' src=" + profileImageUrl + "></a></td></tr>";
         document.getElementById("contactos").innerHTML = html1;
       }
       html1 += "</table>";
@@ -212,13 +213,15 @@
         document.getElementById('tecladoinput').value = ''; //cuando pulsemos enviar un mensaje, se limpiara el formulario
         break;
       case 'image':
-        html2 += "<img width=80 src='" + contenido + "'/>" + "</p>" ;
+        html2 += "<img width=30% src='" + contenido + "'/>" + "</p>" ;
         break;
       case 'speech':
         html2 += contenido + "</p>";
         break;
     }
-    document.getElementById("pantalla").innerHTML = html2;
+    almacena += html2;
+    document.getElementById('pantalla').innerHTML = almacena;
+    document.getElementById('pantalla').scrollTop = document.getElementById('pantalla').scrollHeight; //hacemos que cuando se vaya rellenando pantalla con mensajes, el scroll sea automatico al ultimo elemento mas reciente
 
     for (var key in data) {
       formData.append(key, data[key]);
@@ -261,7 +264,7 @@
           }
           if (data[i].tipo == "image") {
             var contenido=data[i].contenido;
-            html1 += "<img width=80 src='" + contenido + "'/><br>";
+            html1 += "<img width=30% src='" + contenido + "'/><br>";
             document.getElementById("pantalla").innerHTML = html1;
           }
           //if (data[i].tipo == "speech") {
@@ -271,7 +274,10 @@
           //}
         }
         html1 += "</p>";
+        almacena += html1;
       });
+      document.getElementById('pantalla').innerHTML = almacena;
+      document.getElementById('pantalla').scrollTop = document.getElementById('pantalla').scrollHeight;
     }
   </script>
 </body>

@@ -76,7 +76,7 @@ tr,td{
    visibility: hidden;
    position:absolute;
 }
-img {
+.imgpantalla {
   border-radius: 50%;
 }
 
