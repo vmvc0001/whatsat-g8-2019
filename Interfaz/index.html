@@ -82,7 +82,7 @@
   var periodical;
   var id_org; // la variable id_org almacena el valor del campo identifica
   var almacena=''; //almacena los envios de para no ser machacados en pantalla
-  
+
   function handleInput(e){
     id_org = e;
   }
@@ -149,9 +149,10 @@
   }
 
   function cancelPhoto(){
-    emision.getTracks()[0].stop();
     document.getElementById('fotos').style.visibility='hidden';
-    terminal(id_dest);
+    document.getElementById('terminal').style.visibility='visible';
+
+    //terminal(id_dest);
   }
 
   function exito(stream) {
@@ -240,6 +241,7 @@
     var id_dest;
 
     function terminal(name){ //oculta los contactos y abre la terminal con un usuario destino de la mensajeria
+      almacena='';
       clearInterval(periodical); //para los anteriores intervalos de referesco y solo deja que inicie el que esta a continuacion
       document.getElementById('contactos').style.visibility="visible";
       document.getElementById('terminal').style.visibility="visible";
@@ -260,12 +262,10 @@
           if (data[i].tipo == "text" || data[i].tipo == "speech") {
             var contenido=data[i].contenido;
             html1 += contenido + "<br>";
-            document.getElementById("pantalla").innerHTML = html1;
           }
           if (data[i].tipo == "image") {
             var contenido=data[i].contenido;
             html1 += "<img width=30% src='" + contenido + "'/><br>";
-            document.getElementById("pantalla").innerHTML = html1;
           }
           //if (data[i].tipo == "speech") {
             //var contenido=data[i].contenido;
