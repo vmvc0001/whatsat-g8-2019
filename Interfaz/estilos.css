@@ -13,23 +13,34 @@ body{
   background-image: url("https://st.depositphotos.com/2275299/2506/v/950/depositphotos_25067109-stock-illustration-abstract-vector-background-in-vintage.jpg");
 }
 
+.font-weight-bold{
+  color:#327F3C;
+}
+label{
+
+}
+.contact{
+  color:#327F3C;
+}
+
 .pantalla{
   overflow:hidden;
   background-image: url("https://i.pinimg.com/originals/79/5c/ab/795cabc4647f73b365e2e6eabd0f34dc.png");
-  width:500px;
-  height: 500px;
+  width:80%;
+  height: 50%;
   float:right;
   border: 3px solid #333;
   font-style: italic;
   font-color: Black;
-  font-size: 40px;
+  font-size: 150%;
+  clear:both;
 }
 
 #teclado{
      clear: both;
-     height: 296px;
-     width: 500px;
-     float: right;
+     height: 29%;
+     width: 67%;
+     float: right ;
 }
 #comandos{
   float: right;
@@ -42,8 +53,8 @@ body{
    z-index: 0;
    position:absolute;
    overflow: auto;
-   width:400px;
-   height:500px;
+   width:auto;
+   height:85%;
    border-radius: 15%;
 }
 tr,td{
@@ -73,6 +84,6 @@ tr:nth-child(even){
 }
 
 tr:hover td{
-	background-color: #00acee;
+	background-color: #327F3C  ;
 	color: white;
 }
