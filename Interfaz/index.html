@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="estilos.css"/>
   <link rel="icon" type="image/jpg" href="https://idescargar.com/wp-content/uploads/2015/04/descargar-whatsapp-plus-apk-gratis.png">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <!--                      -->
@@ -126,7 +127,6 @@
 
   function handleFotos(){
     document.getElementById('terminal').style.visibility='hidden';
-    document.getElementById('contactos').style.visibility='hidden';
     document.getElementById('fotos').style.visibility='visible';
     navigator.mediaDevices.getUserMedia({audio:false, video:true}).then(exito).catch(error);
 
