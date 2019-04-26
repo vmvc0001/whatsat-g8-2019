@@ -27,24 +27,23 @@ label{
 .pantalla{
   overflow:hidden;
   background-image: url("https://i.pinimg.com/originals/79/5c/ab/795cabc4647f73b365e2e6eabd0f34dc.png");
-  width:80%;
+  width:100%;
   height: 50%;
   float:right;
   border: 3px solid #333;
-  font-style: italic;
+  font-style: normal;
   font-color: Black;
   font-size: 150%;
   clear:both;
 }
 
 #teclado{
-     clear: both;
-     height: 29%;
-     width: 67%;
-     float: right ;
+  width: 70%;
+  float: right;
 }
 #comandos{
-  float: right;
+  width: 40%;
+  float: both;
 }
 #identifica{
   float: center;
@@ -52,10 +51,10 @@ label{
 
 #contactos{
    z-index: 0;
-   position:absolute;
+   /* position: absolute; */
    overflow: auto;
-   width:auto;
    height:85%;
+   width: 30%;
    border-radius: 15%;
 }
 tr,td{
@@ -70,16 +69,22 @@ tr,td{
 #terminal{
    z-index: 1;
    visibility: hidden;
+   width: 70%;
+   overflow-x: visible;
+
 }
 #fotos{
    z-index: 2;
    visibility: hidden;
    position:absolute;
 }
-.imgpantalla {
+#imgpantalla {
   border-radius: 50%;
 }
 
+#tablacontactos{
+  overflow-y: hidden;
+}
 tr:nth-child(even){
 	background-color: #ddd;
 }
