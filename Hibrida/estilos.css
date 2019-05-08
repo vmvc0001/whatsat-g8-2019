@@ -1,0 +1,95 @@
+.center {
+  text-align:center;
+}
+
+.center form {
+ display:inline-block;
+}
+
+h1 {
+  color:#00acee;
+}
+body{
+  background-image: url("https://st.depositphotos.com/2275299/2506/v/950/depositphotos_25067109-stock-illustration-abstract-vector-background-in-vintage.jpg");
+}
+
+.font-weight-bold{
+  color:#327F3C;
+}
+
+label{
+
+}
+.contact{
+  color:#327F3C;
+}
+
+.pantalla{
+  overflow:hidden;
+  background-image: url("https://i.pinimg.com/originals/79/5c/ab/795cabc4647f73b365e2e6eabd0f34dc.png");
+  width:100%;
+  height: 50%;
+  float:right;
+  border: 3px solid #333;
+  font-style: normal;
+  font-color: Black;
+  font-size: 150%;
+  clear:both;
+}
+
+#teclado{
+  width: 70%;
+  float: right;
+}
+#comandos{
+  width: 40%;
+  float: both;
+}
+#identifica{
+  float: center;
+}
+
+#contactos{
+   z-index: 0;
+   /* position: absolute; */
+   overflow: auto;
+   height:85%;
+   width: 30%;
+   border-radius: 15%;
+}
+tr,td{
+  width:100px;
+  height:100px;
+  background-color:White;
+  font-size: 10px;
+  font-style: oblique;
+  font-weight: bold;
+}
+
+#terminal{
+   z-index: 1;
+   visibility: hidden;
+   width: 70%;
+   overflow-x: visible;
+
+}
+#fotos{
+   z-index: 2;
+   visibility: hidden;
+   position:absolute;
+}
+#imgpantalla {
+  border-radius: 50%;
+}
+
+#tablacontactos{
+  overflow-y: hidden;
+}
+tr:nth-child(even){
+	background-color: #ddd;
+}
+
+tr:hover td{
+	background-color: #327F3C  ;
+	color: white;
+}
