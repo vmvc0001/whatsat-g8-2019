@@ -43,7 +43,7 @@
       <!--                      -->
       <!-- Seccion 4.1.fotos      -->
       <!--                      -->
-      <div class="container center" id="fotos">
+      <!-- <div class="container center" id="fotos">
         <form role="form center">
           <div class="row" id="Webcam">
             <video width="200" height="180"></video>
@@ -53,17 +53,17 @@
             <input type="button" class="btn btn-success" value="Cancel" onClick="cancelPhoto()" />
           </div>
         </form>
-      </div>
+      </div> -->
       <div class="pantalla" id="pantalla">
       </div>
       <div id="teclado">
         <input type="text" class="form-control" id="tecladoinput" onChange="handleTeclado(document.getElementById('tecladoinput').value)"/>
       </div>
       <div id="comandos">
-        <img  width="30" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
-        <img  width="30" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
-        <img  width="40" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
-        <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
+        <img  width="31" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
+        <img  width="31" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
+        <img  width="31" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
+        <img  width="31" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
       </div>
 
     </div>
@@ -78,7 +78,7 @@
     pantalla: document.getElementById('pantalla'),
     divTermi: document.getElementById('terminal'),
     divConta: document.getElementById('contactos'),
-    divFotos: document.getElementById('fotos'),
+    //divFotos: document.getElementById('fotos'),
     video: document.querySelector('video')
     //emision: ''
   };
@@ -98,7 +98,7 @@
   function contactos(e){
     document.getElementById('contactos').style.visibility="visible";
     document.getElementById('terminal').style.visibility="hidden";
-    document.getElementById('fotos').style.visibility="hidden";
+    //document.getElementById('fotos').style.visibility="hidden";
     var url = "https://ssaatt.com/whatsat/contactos/" + e;
 
     fetch(url)
@@ -136,23 +136,23 @@
   //   navigator.mediaDevices.getUserMedia({audio:false, video:true}).then(exito).catch(error);
   //}
 
-  function capturePhoto() {
-    var canvas = document.createElement('canvas');
-    document.querySelector('html').appendChild(canvas);
-    canvas.width = this.state.video.getAttribute("width");
-    canvas.height = this.state.video.getAttribute("height");
-    canvas.getContext('2d').drawImage(this.state.video, 0, 0, canvas.width, canvas.height);
-    var picture = canvas.toDataURL("image/png");
-    envia(picture,"image");
-    document.querySelector('html').removeChild(canvas);
-    cancelPhoto();
-    //var texto="<p align=right>"+this.state.teclado+"</p>";
-    //this.state.pantalla.innerHTML= '<p align=right><img width=80 src="'+picture+'"/></p>'+ this.state.pantalla.innerHTML;
-    //cerrar automaticamente cuando haga foto? visibility=hidden
-  }
+  // function capturePhoto() {
+  //   var canvas = document.createElement('canvas');
+  //   document.querySelector('html').appendChild(canvas);
+  //   canvas.width = this.state.video.getAttribute("width");
+  //   canvas.height = this.state.video.getAttribute("height");
+  //   canvas.getContext('2d').drawImage(this.state.video, 0, 0, canvas.width, canvas.height);
+  //   var picture = canvas.toDataURL("image/png");
+  //   envia(picture,"image");
+  //   document.querySelector('html').removeChild(canvas);
+  //   cancelPhoto();
+  //   //var texto="<p align=right>"+this.state.teclado+"</p>";
+  //   //this.state.pantalla.innerHTML= '<p align=right><img width=80 src="'+picture+'"/></p>'+ this.state.pantalla.innerHTML;
+  //   //cerrar automaticamente cuando haga foto? visibility=hidden
+  // }
 
   function cancelPhoto(){
-    document.getElementById('fotos').style.visibility='hidden';
+    //document.getElementById('fotos').style.visibility='hidden';
     document.getElementById('terminal').style.visibility='visible';
 
     //terminal(id_dest);
@@ -179,8 +179,7 @@
     document.getElementById('pantalla').scrollTop = document.getElementById('pantalla').scrollHeight; //hacemos que cuando se vaya rellenando pantalla con mensajes, el scroll sea automatico al ultimo elemento mas reciente
     recognition.onend = function(event) {
       if (data_uri==null) {
-        textospeech += "<p align=right><i>No he reconocido</i></p>";
-        almacena += textospeech;
+      //  almacena += "<p align=right><i>No he reconocido</i></p>";
         pantalla.innerHTML= almacena+pantalla.innerHTML;
       }
     };
@@ -190,7 +189,7 @@
         //var texto="<p align=right>"+data_uri+"</p>";
         //pantalla.innerHTML= texto + pantalla.innerHTML;
         envia(data_uri,"speech");
-        almacena += "<p align=right><i>Finalizado. Enviado: </i>" + data_uri + "</p>";
+        almacena += "<p align=right><i>Finalizado. Enviado:<br> </i>" + data_uri + "</p>";
         pantalla.innerHTML= almacena + pantalla.innerHTML;
         document.getElementById('pantalla').scrollTop = document.getElementById('pantalla').scrollHeight; //hacemos que cuando se vaya rellenando pantalla con mensajes, el scroll sea automatico al ultimo elemento mas reciente
       }
@@ -198,6 +197,7 @@
   }
 
   function handleGeoLocation(){
+    almacena += "<p align=right>Obteniendo geolocalizaci&oacute;n...</p>";//Ubicaci&oacute;n
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -274,6 +274,8 @@
           if (data[i].tipo == "image") {
             var contenido=data[i].contenido;
             html1 += "<img width=30% src='" + contenido + "'/><br>";
+            html1 += "";
+
           }
           if (data[i].tipo == "speech") {
             var speech = new SpeechSynthesisUtterance();
