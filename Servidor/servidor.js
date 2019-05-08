@@ -5,6 +5,7 @@ var app=express();
 app.set("view engine","ejs");
 
 var router=express.Router();
+var bodyParser=require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
