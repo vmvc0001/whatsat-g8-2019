@@ -51,7 +51,8 @@ label{
 
 #contactos{
    z-index: 0;
-   /* position: absolute; */
+   visibility: visible;
+   position: absolute;
    overflow: auto;
    height:85%;
    width: 30%;

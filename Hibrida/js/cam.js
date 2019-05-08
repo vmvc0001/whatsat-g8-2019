@@ -9,15 +9,17 @@
     }
 
     function handleFotos() {
+      document.getElementById('terminal').style.visibility='hidden';
+      document.getElementById('fotos').style.visibility='visible';
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
         destinationType: destinationType.DATA_URL });
     }
-	
+
     function onPhotoDataSuccess(imageData) {
 		var data_uri= "data:image/jpeg;base64," + imageData;
-		envia(data_uri,"image");  
+		envia(data_uri,"image");
     }
-	
+
     function onFail(message) {
       alert('Failed because: ' + message);
     }

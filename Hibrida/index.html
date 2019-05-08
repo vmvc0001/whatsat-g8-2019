@@ -5,10 +5,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/cam.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
   <link rel="stylesheet" type="text/css" href="estilos.css"/>
   <link rel="icon" type="image/jpg" href="https://idescargar.com/wp-content/uploads/2015/04/descargar-whatsapp-plus-apk-gratis.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' *; script-src 'unsafe-inline' *; style-src 'self' * 'unsafe-inline'; img-src * data:">
 </head>
 <body>
   <!--                      -->
@@ -28,7 +31,6 @@
         </div>
       </form>
     </div>
-    <div class="main row">
     <!--                      -->
     <!-- Seccion 3.contactos  -->
     <!--                      -->
@@ -65,7 +67,6 @@
       </div>
 
     </div>
-  </div>
   </div>
   <script type="text/javascript">
   this.state={
@@ -129,12 +130,11 @@
     envia(contenido,"text");
   }
 
-  function handleFotos(){
-    document.getElementById('terminal').style.visibility='hidden';
-    document.getElementById('fotos').style.visibility='visible';
-    navigator.mediaDevices.getUserMedia({audio:false, video:true}).then(exito).catch(error);
-
-  }
+  // function handleFotos(){
+  //   document.getElementById('terminal').style.visibility='hidden';
+  //   document.getElementById('fotos').style.visibility='visible';
+  //   navigator.mediaDevices.getUserMedia({audio:false, video:true}).then(exito).catch(error);
+  //}
 
   function capturePhoto() {
     var canvas = document.createElement('canvas');
@@ -251,7 +251,7 @@
       almacena='';
       document.getElementById('pantalla').innerHTML = almacena;
       clearInterval(periodical); //para los anteriores intervalos de referesco y solo deja que inicie el que esta a continuacion
-      document.getElementById('contactos').style.visibility="visible";
+      document.getElementById('contactos').style.visibility="hidden";
       document.getElementById('terminal').style.visibility="visible";
       id_dest = name;
       periodical = setInterval(recibe,3000); //llama a recibe cada 3000 ms
