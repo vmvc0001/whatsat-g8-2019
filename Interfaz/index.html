@@ -179,9 +179,8 @@
     document.getElementById('pantalla').scrollTop = document.getElementById('pantalla').scrollHeight; //hacemos que cuando se vaya rellenando pantalla con mensajes, el scroll sea automatico al ultimo elemento mas reciente
     recognition.onend = function(event) {
       if (data_uri==null) {
-        textospeech += "<p align=right><i>No he reconocido</i></p>";
-        almacena += textospeech;
-        pantalla.innerHTML= almacena+pantalla.innerHTML;
+        almacena += "<p align=right><i>No he reconocido</i></p>";
+        pantalla.innerHTML= almacena + pantalla.innerHTML;
       }
     };
     recognition.onresult = function(event) {
@@ -190,7 +189,7 @@
         //var texto="<p align=right>"+data_uri+"</p>";
         //pantalla.innerHTML= texto + pantalla.innerHTML;
         envia(data_uri,"speech");
-        almacena += "<p align=right><i>Finalizado. Enviado: </i>" + data_uri + "</p>";
+        almacena += "<p align=right><i>Finalizado. Enviado:<br> </i>" + data_uri + "</p>";
         pantalla.innerHTML= almacena + pantalla.innerHTML;
         document.getElementById('pantalla').scrollTop = document.getElementById('pantalla').scrollHeight; //hacemos que cuando se vaya rellenando pantalla con mensajes, el scroll sea automatico al ultimo elemento mas reciente
       }
