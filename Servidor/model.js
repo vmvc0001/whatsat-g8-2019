@@ -2,7 +2,6 @@ var model = require('./Db.js');
 
 class DaoContactos {
   constructor() {}
-
   read(id) {
     var db = new model.Db();
     return new Promise(resolve => {

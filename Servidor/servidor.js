@@ -24,7 +24,7 @@ router.get("/contactos/:id",function(res,req){
 router.post("/envia",function(res,req){
   //var dao=new model.DaoMensajes();
   var dtoMensajes=req.body;
-  dao.read(req.params.id).then(dtoContactos => {
+// ??  dao.read(req.params.id).then(dtoContactos => {
     res.setHeader('Access-Control-Allow-Origin','*');
     res.setHeader('Content-Type', 'application/json');
     resolve(dtoMensajes);
