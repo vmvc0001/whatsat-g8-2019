@@ -1,32 +1,24 @@
 
 --
--- Estructura de tabla para la tabla contactos
+-- Base de datos: `whatsat2019`
 --
 
-CREATE TABLE `contactos` (
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contactos`
+--
+
+CREATE TABLE IF NOT EXISTS `contactos` (
   `id` varchar(20) NOT NULL,
   `surName` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `profileImageUrl` varchar(100) NOT NULL
+  `profileImageUrl` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
 --
--- Estructura de tabla para la tabla mensajes
---
-
-CREATE TABLE `mensajes` (
-  `id` int(11) NOT NULL,
-  `origen` varchar(50) NOT NULL,
-  `destino` varchar(50) NOT NULL,
-  `tipo` varchar(10) NOT NULL,
-  `contenido` longblob NOT NULL,
-  `leido` tinyint(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
-
---
--- Volcado de datos para la tabla contactos
+-- Volcado de datos para la tabla `contactos`
 --
 
 INSERT INTO `contactos` (`id`, `surName`, `name`, `profileImageUrl`) VALUES
@@ -66,5 +58,21 @@ INSERT INTO `contactos` (`id`, `surName`, `name`, `profileImageUrl`) VALUES
 ('jemunoz', 'Muñoz Exposito', 'José Enrique', 'http://ssaatt.com/whatsat/profiles/jemunoz.jpg'),
 ('jccuevas', 'Cuevas Martinez', 'Juan Carlos', 'http://ssaatt.com/whatsat/profiles/jccuevas.png'),
 ('mavd0001', 'Ventura Duque', 'Manuel Antonio', 'http://ssaatt.com/whatsat/profiles/mavd0001.png');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensajes`
+--
+
+CREATE TABLE IF NOT EXISTS `mensajes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `origen` varchar(50) NOT NULL,
+  `destino` varchar(50) NOT NULL,
+  `tipo` varchar(10) NOT NULL,
+  `contenido` mediumtext NOT NULL,
+  `leido` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 
