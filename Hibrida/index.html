@@ -69,6 +69,10 @@
     </div>
   </div>
   <script type="text/javascript">
+
+  var path="https://ssaatt.com/whatsat";
+  //var path="";
+
   this.state={
     id_org:'',
     id_dest:'',
@@ -99,7 +103,7 @@
     document.getElementById('contactos').style.visibility="visible";
     document.getElementById('terminal').style.visibility="hidden";
     //document.getElementById('fotos').style.visibility="hidden";
-    var url = "https://ssaatt.com/whatsat/contactos/" + e;
+    var url = path + "/contactos/" + e;
 
     fetch(url)
     .then(function(response) {
@@ -214,7 +218,7 @@
   }
 
   function envia(contenido,tipo){ //asociada al envento de enviar cualquier tipo de mensaje en un POST
-    var url = 'https://ssaatt.com/whatsat/envia';
+    var url = path + '/envia';
     var data={'id_org':id_org,'id_dest':id_dest,'tipo':tipo,'contenido':contenido};
     var formData = new FormData();
 
@@ -259,7 +263,7 @@
     }
 
     function recibe(){
-      var url =  "https://ssaatt.com/whatsat/recibe/" + id_dest + "/" + id_org; //se cambian dest y org para que los mensajes los visualice //el destinatario y no el remitente en su misma pantalla
+      var url =  path + "/recibe/" + id_dest + "/" + id_org; //se cambian dest y org para que los mensajes los visualice //el destinatario y no el remitente en su misma pantalla
       fetch(url)
       .then(function(response) {
         return response.json();
