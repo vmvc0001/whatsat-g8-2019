@@ -12,7 +12,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 //   res.render("index");
 // });
 
-app.get("/contactos/:id",function(res,req){
+app.get("/contactos/:id",function(req,res){
+  console.log("id=",req.params.id);
   var dao=new model.DaoContactos();
   dao.read(req.params.id).then(dtoContactos => {
     res.setHeader('Access-Control-Allow-Origin','*');
@@ -21,7 +22,7 @@ app.get("/contactos/:id",function(res,req){
   });
 });
 
-app.post("/envia",function(res,req){
+app.post("/envia",function(req,res){
   var dao=new model.DaoMensajes();
   var dtoMensajes=req.body;
   dao.create(dtoMensajes);
@@ -39,4 +40,4 @@ app.get("/recibe/:id_org/:id_dest",function (req,res) {
   });
 });
 
-http.createServer(app).listen(80);
+http.createServer(app).listen(6969);
