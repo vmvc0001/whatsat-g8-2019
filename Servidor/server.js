@@ -17,7 +17,7 @@ app.get("/contactos/:id",function(req,res){
   var dao=new model.DaoContactos();
   dao.read(req.params.id).then(dtoContactos => {
     res.setHeader('Access-Control-Allow-Origin','*');
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Content-Type','application/json');
     res.render("contactos",{"listaContactos":dtoContactos});
   });
 });
