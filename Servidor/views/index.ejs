@@ -5,7 +5,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="estilos.css"/>
+  <link rel="stylesheet" type="text/css" href="css/estilos.css"/>
   <link rel="icon" type="image/jpg" href="https://idescargar.com/wp-content/uploads/2015/04/descargar-whatsapp-plus-apk-gratis.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,16 +52,19 @@
           </div>
         </form>
       </div>
-      <div class="pantalla" id="pantalla">
+      <div id="pantalla">
+      </div>
+      <div class="row">
+
       </div>
       <div id="teclado">
         <input type="text" class="form-control" id="tecladoinput" onChange="handleTeclado(document.getElementById('tecladoinput').value)"/>
       </div>
       <div id="comandos">
-        <img  width="30" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
-        <img  width="30" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
-        <img  width="40" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
-        <img  width="40" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
+        <img  width="32" name="geolocation" src='img/geolocation.png' alt="geolocalizacion" onClick="handleGeoLocation()" />
+        <img  width="32" name="fotos" src='img/photo.png' alt="fotos" onClick="handleFotos()" />
+        <img  width="32" name="voz" src='img/voice.png' alt="voz" onClick="handleVoz()" />
+        <img  width="32" name="envia" src='img/send.png' alt="envia" onClick="handleEnvia()" />
       </div>
 
     </div>
@@ -70,7 +73,7 @@
   <script type="text/javascript">
 
   //var path="https://ssaatt.com/whatsat";
-  var path="http://4fc65169.ngrok.io";
+  var path="http://41f56ff0.ngrok.io";
 
   this.state={
     id_org:'',

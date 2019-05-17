@@ -13,7 +13,7 @@ class Db {
   readContactos(id) {
     var conn = this.config;
     return new Promise(function(resolve, reject) {
-      conn.query('SELECT id,surName,name,profileImageUrl FROM contactos WHERE EXISTS (SELECT 1 FROM contactos WHERE id = \''+id+'\')', function(err, result) {
+      conn.query('SELECT id,surName,name,profileImageUrl FROM contactos WHERE EXISTS (SELECT 1 FROM contactos WHERE id = \''+id+'\') ORDER BY `contactos`.`surName` ASC', function(err, result) {
         resolve(result);
       });
     });
