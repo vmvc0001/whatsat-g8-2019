@@ -71,6 +71,7 @@ tr,td{
    visibility: hidden;
    width: 70%;
    overflow-x: visible;
+   height: 400px;
 
 }
 #fotos{

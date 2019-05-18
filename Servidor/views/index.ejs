@@ -72,8 +72,8 @@
   </div>
   <script type="text/javascript">
 
-  //var path="https://ssaatt.com/whatsat";
-  var path="http://41f56ff0.ngrok.io";
+  var path="https://ssaatt.com/whatsat";
+  //var path="http://7c4fd8f8.ngrok.io";
 
   this.state={
     id_org:'',
@@ -91,6 +91,7 @@
   var emision;
   var periodical;
   var id_org; // la variable id_org almacena el valor del campo identifica
+  var id_dest;
   var almacena=''; //almacena los envios de para no ser machacados en pantalla
 
   function handleInput(e){
@@ -219,9 +220,10 @@
   }
 
   function envia(contenido,tipo){ //asociada al envento de enviar cualquier tipo de mensaje en un POST
-    var url = path +'/envia';
-    var data={'id_org':id_org,'id_dest':id_dest,'tipo':tipo,'contenido':contenido};
-    var formData = new FormData();
+    var url = path + "/envia";
+    var data={"id_org":id_org,"id_dest":id_dest,"tipo":tipo,"contenido":contenido};
+    //var formdata = new FormData();
+    console.log(data);
 
     var html2 = "<p align=right>";
     switch (tipo) {
@@ -237,12 +239,14 @@
     document.getElementById('pantalla').innerHTML = almacena;
     document.getElementById('pantalla').scrollTop = document.getElementById('pantalla').scrollHeight; //hacemos que cuando se vaya rellenando pantalla con mensajes, el scroll sea automatico al ultimo elemento mas reciente
 
-    for (var key in data) {
-      formData.append(key, data[key]);
-    }
-    fetch (url, {
-      method: 'POST',
-      body: formData,})
+    // for (var key in data) {
+    //   formdata.append(key, data[key]);
+    // }
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"}})
       .then(function(response) {
         return response.json();
       })
@@ -250,8 +254,6 @@
         console.log('Success:', data);
       });
     }
-
-    var id_dest;
 
     function terminal(name){ //oculta los contactos y abre la terminal con un usuario destino de la mensajeria
       almacena='';
@@ -270,6 +272,7 @@
         return response.json();
       })
       .then(function(data) {
+        console.log(data);
         var tam=data.length;
         var html1 = "<p align=left>";
         for (i=0;i<tam;i++){
