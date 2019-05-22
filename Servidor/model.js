@@ -16,7 +16,8 @@ class DaoMensajes {
   constructor() {}
   create(dtoMensajes){
     var db=new model.Db();
-    db.createMensajes(dtoMensajes).then();
+    db.createMensajes(dtoMensajes).then(); //Existe un método en Db.js llamado createMensajes que es el encargado de almacenar
+                                      //los valores medidos en la base de datos
   }
   read(id_org,id_dest){
     var db=new model.Db();
