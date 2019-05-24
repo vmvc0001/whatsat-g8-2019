@@ -47,9 +47,9 @@ label{
    z-index: 0;
    float: left;
    /* position: absolute; */
-   height:50%;
+   height:85%;
    width: 30%;
-   border-radius: 15%;
+   border-radius: 10%;
    overflow: auto;
 }
 tr,td{
